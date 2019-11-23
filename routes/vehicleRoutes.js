@@ -1,8 +1,8 @@
-const { Vehicle } = require('../models')
+const { Vehicle, Review } = require('../models')
 
 module.exports = app => {
   app.get('/vehicles', (req, res) => {
-    Vehicle.findAll()
+    Vehicle.findAll({ include: Review})
       .then(vehicle => res.json(vehicle))
       .catch(e => console.error(e))
   })

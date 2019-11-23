@@ -1,3 +1,3 @@
 const Sequelize = require('sequelize')
 
-module.exports = new Sequelize('mysql://username:password@localhost/')
+module.exports = new Sequelize(process.env.LOCAL_DB)
