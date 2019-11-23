@@ -21,7 +21,7 @@ module.exports = app => {
   })
 
   app.delete('/reviews/:id', (req, res) => {
-    review.findOne({ where: { id: parseInt(req.params.id) } })
+    Review.findOne({ where: { id: parseInt(req.params.id) } })
       .then(review => review.destroy())
       .then(() => res.sendStatus(200))
       .catch(e => console.error(e))
