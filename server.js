@@ -12,5 +12,5 @@ app.use(express.json())
 require('./routes')(app)
 
 db.sync()
-  .then(() => app.listen(process.env.PORT || 3000))
+  .then(() => app.listen(process.env.PORT))
   .catch(e => console.log(e))
