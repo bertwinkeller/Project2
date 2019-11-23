@@ -1,4 +1,4 @@
-const { Item } = require('../models')
+const { Vehicle } = require('../models')
 
 module.exports = app => {
   app.get('/vehicles', (req, res) => {
