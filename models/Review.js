@@ -9,6 +9,5 @@ module.exports = (Model, DataTypes, sequelize) => {
     sequelize,
     modelName: 'review'
   })
-
   return Review
 }
