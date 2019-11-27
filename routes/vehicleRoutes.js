@@ -2,7 +2,7 @@ const { Vehicle, Review } = require('../models')
 
 module.exports = app => {
   app.get('/vehicles', (req, res) => {
-    Vehicle.findAll({ include: Review})
+    Vehicle.findAll({ include: Review })
       .then(vehicle => res.json(vehicle))
       .catch(e => console.error(e))
   })
