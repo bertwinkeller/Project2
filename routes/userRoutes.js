@@ -7,6 +7,15 @@ module.exports = app => {
       .catch(e => console.error(e))
   })
 
+  app.get('/users/:username/:password', (req, res) => {
+    User.findOne({where: {
+      username: req.params.username,
+      password: req.params.password
+    }})
+      .then(user => res.json(user))
+      .catch(e => console.error(e))
+  })
+
   app.post('/users', (req, res) => {
     User.create(req.body)
       .then(() => res.sendStatus(200))

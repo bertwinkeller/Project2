@@ -59,21 +59,21 @@
   
     //Login
     document.getElementById('login').addEventListener('click', e => {
-      e.preventDefault
-      axios.get(`/users/${document.getElementById('usernane').value}/${document.getElementById('password').value}`)
-        .then(({ vehiclesRented }) => vehicles)
-        .then(vehicles => {
-          axios.get('/multiple/vehicles', vehicles)
-            .then(vehicles => {
-              vehicles.forEach(vehicle => {
+      e.preventDefault()
+      axios.get(`/users/${document.getElementById('username').value}/${document.getElementById('password').value}`)
+        .then(({ data }) =>  JSON.parse(data.vehiclesRented))
+        .then(vehiclesIds => {
+          axios.get(`/multiple/vehicles/${vehiclesIds.join(',')}`)
+            .then(({ data }) => {
+              data.forEach(vehicle => {
                 let vehicleCard = document.createElement('div')
-                vehicleCard.innnerHtml = vehicle
+                vehicleCard.innerHTML = `<img src="${vehicle.photoLink}"><h3>${vehicle.name}</h3>`
                 document.getElementById('vehicles').append(vehicleCard)
               })
             })
-            .catch(err => console.log(err))
+            .catch(e => console.error(e))
         })
-        .catch(err => console.log(err))
+        .catch(e => console.error(e))
     })
   </script>
 </body>
