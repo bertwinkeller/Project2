@@ -26,4 +26,115 @@ INSERT INTO reviews (name, rating, review, createdAt, updatedAt, vehicleId) VALU
 ('Cade Fisher', 5, "Such a great car!", '2019-11-26 10:01:00', '2019-11-26 10:01:00', 11),
 ('Jameel Berry', 5, "Would definitely take it for a ride again!", '2019-11-26 10:01:00', '2019-11-26 10:01:00', 12);
 
+-- JSON Version of Seed to be used with the 'multiple/vehicles
+[
+  {
+    "name": "Ferrari F430 F1",
+    "reservedFrom": "{}",
+    "mpg": 11,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Ferrari_F430_F1.jpg" 
+  },
+  {
+    "name": "Ferrari 458 ITALIA",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Ferrari_458_ITALIA.jpg" 
+  },
+  {
+    "name": "Ferrari 488 GTB",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Ferrari_458_ITALIA.jpg" 
+  },
+  {
+    "name": "Lamborghini GALLARDO LP550-2",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Lamborghini_GALLARDO_LP550-2.jpg" 
+  },
+  {
+    "name": "Lamborghini HURACAN LP580-2",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Lamborghini_HURACAN_LP580-2.jpg" 
+  },
+  {
+    "name": "McLaren 570S",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/McLaren_570S.jpg" 
+  },
+  {
+    "name": "Aston Martin DB11",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Aston_Martin_DB11.jpg" 
+  },
+  {
+    "name": "Mercedes-Benz AMG GT",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Mercedes-Benz_AMG_GT.jpg" 
+  },
+  {
+    "name": "BMW i8",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/BMW_i8.jpg" 
+  },
+  {
+    "name": "Acurra NSX",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Acura_NSX.jpg" 
+  },
+  {
+    "name": "Alfa Romeo 4C Spider",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Alfa_Romeo_4C_Spider.png" 
+  },
+  {
+    "name": "Audi S8",
+    "reservedFrom": "{}",
+    "mpg": 13,
+    "gasType": "Premium",
+    "doors": 2,
+    "seats": 2,
+    "photoLink": "./images/Audi_S8.jpg" 
+  }
+]
 

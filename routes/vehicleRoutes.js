@@ -13,6 +13,16 @@ module.exports = app => {
       .catch(e => console.error(e))
   })
 
+  // Post Multiple
+  app.post('/multiple/vehicles', (req, res) => {
+    let vehicles = req.body
+    vehicles.forEach(vehicle => {
+      Vehicle.create(vehicle)
+        .then(() => res.sendStatus(200))
+        .catch(e => console.error(e))
+    })
+  })
+
   app.put('/vehicles/:id', (req, res) => {
     Vehicle.findOne({ where: { id: parseInt(req.params.id) } })
     //   .then(update some property,(rented?))

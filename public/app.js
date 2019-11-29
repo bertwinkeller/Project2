@@ -54,8 +54,8 @@ const addReview = () => {
     axios.post('/reviews', {
         name: document.getElementById('reviewerName').value,
         rating: document.getElementById('rating').value,
-        review: document.getElementById('review').value
-
+        review: document.getElementById('review').value,
+        vehicleId: document.getElementById('vehicleId').value
     })
     .then(() => {
         console.log('Review added')
