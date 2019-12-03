@@ -2,10 +2,35 @@
 
 const getVehicles = () => {
     axios.get('/vehicles')
-    .then(vehicles => {
-    console.log(vehicles)
+    .then(({data}) => {
+    displayVehicles(data)
     })
     .catch(e => console.error(e))
+}
+
+const displayVehicles = (array) => {
+    array.forEach(car => {
+        console.log(car)
+        let carCard = document.createElement('div')
+        carCard.innerHTML = `
+        <div class="card text-center border-dark mb-3">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">${car.name}</h5>
+        <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
+        <br>
+        <br>
+        <a href="#" class="btn btn-primary">Rent</a>
+      </div>
+      <div class="card-footer text-muted">
+      </div>
+    </div>
+    <br>`
+    document.getElementById('rentDisplay').append(carCard)
+    })
+    
 }
 
 const addVehicle = () => {
@@ -80,4 +105,4 @@ const deleteReview = id => {
     .catch(e => console.error(e))
 }
 
-//
+getVehicles()
