@@ -14,19 +14,19 @@ const displayVehicles = (array) => {
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
-      <div class="card-header">
-        Featured
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">${car.name}</h5>
-        <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
+            <div class="card-header">
+                Featured
+            </div>
+        <div class="card-body">
+            <h5 class="card-title">${car.name}</h5>
+            <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
         <br>
         <br>
-        <a href="#" class="btn btn-primary">Rent</a>
-      </div>
-      <div class="card-footer text-muted">
-      </div>
-    </div>
+            <a href="#" class="btn btn-primary">Rent</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+        </div>
     <br>`
     document.getElementById('rentDisplay').append(carCard)
     })
