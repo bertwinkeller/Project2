@@ -17,9 +17,19 @@ module.exports = app => {
   })
 
   app.post('/users', (req, res) => {
-    User.create(req.body)
-      .then(() => res.sendStatus(200))
-      .catch(e => console.error(e))
+    User.findOne({where: {
+      username: req.body.username
+    }})
+      .then(user => {
+        if (user) {
+          res.sendStatus(409)
+        } else {
+          User.create(req.body)
+            .then(() => res.sendStatus(200))
+            .catch(e => console.error(e))
+        }
+      })
+      .catch(e => console.log(e))
   })
 
   app.put('/users/:id', (req, res) => {
