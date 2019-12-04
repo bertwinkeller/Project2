@@ -9,6 +9,6 @@ Vehicle.hasMany(Review)
 Review.belongsTo(Vehicle)
 
 User.hasMany(Review)
-Review.belongsTo(Vehicle)
+Review.belongsTo(User)
 
 module.exports = {Vehicle, Review, User}
