@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Log In</title>
+  <title>Home Page</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
@@ -34,49 +34,18 @@
       </div>
     </div>
   </nav>
-</div>
-<div class="container">
-  <div class="row justify-content-center">
-    <h2>Log In </h2>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Username</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <h2>Sign Up </h2>
-  </div>
-  <div class="card">
-      <div class="card-body">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-          </div>
-            <button type="submit" id="create" class="btn btn-primary">Create</button>
-        </form>
+  <div class="row">
+    <div class="input-group mb-3" id="search">
+      <input type="text" class="form-control" placeholder="Year, Make, Model" aria-label="Recipient's username"
+        aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
       </div>
     </div>
-</div>
+  </div>
+  <div class="row" id="rentDisplay">
+  </div>
+  </div>
 
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -90,12 +59,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="./app.js"></script>
-  <script>
-    document.getElementById('create').addEventListener('click', e => {
-      e.preventDefault()
-      
-    })
-  </script>
 
 </body>
 
