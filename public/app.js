@@ -1,5 +1,6 @@
 // Vehicle axios requests
 
+// axios get request
 const getVehicles = () => {
     axios.get('/vehicles')
     .then(({data}) => {
@@ -8,6 +9,7 @@ const getVehicles = () => {
     .catch(e => console.error(e))
 }
 
+// displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
         console.log(car)

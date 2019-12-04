@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Home Page</title>
+  <title>Log In</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
@@ -14,43 +14,73 @@
 </head>
 
 <body>
-
-  <div class="container">
-    <nav class="navbar navbar-dark bg-dark" id="nav">
-      <a class="navbar-brand" href="./index.html">
-        <img src="./images/logo.png" width="40" height="40" alt="Logo">
-      </a>
-      <h3 class="title">TALLY.IO</h3>
-      <div>
-        <div class="dropleft">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            More
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="./index.html">Rent</a>
-            <a class="dropdown-item" href="./review.html">Review</a>
-            <a class="dropdown-item" href="./add.html">Add</a>
-            <a class="dropdown-item" href="./advsearch.html">Advanced Search</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="row">
-      <div class="input-group mb-3" id="search">
-        <input type="text" class="form-control" placeholder="Year, Make, Model" aria-label="Recipient's username"
-          aria-describedby="button-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+  <nav class="navbar navbar-dark bg-dark" id="nav">
+    <a class="navbar-brand" href="./index.html">
+      <img src="./images/logo.png" width="40" height="40" alt="Logo">
+    </a>
+    <h3 class="title">TALLY.IO</h3>
+    <div>
+      <div class="dropleft">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          More
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="./index.html">Login</a>
+          <a class="dropdown-item" href="./rent.html">Rent</a>
+          <a class="dropdown-item" href="./review.html">Review</a>
+          <a class="dropdown-item" href="./add.html">Add</a>
         </div>
       </div>
     </div>
 
-    <div class="row" id="rentDisplay">
-
-    </div>
-
+    
+      
+  </nav>
+</div>
+<div class="container">
+  
+  <div class="row justify-content-center">
+    <h2>Log In </h2>
   </div>
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+          <button type="submit" id="login" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h2>Sign Up </h2>
+  </div>
+  <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+          </div>
+            <button type="submit" id="create" class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </div>
+</div>
 
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -64,6 +94,33 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="./app.js"></script>
+  <script>
+    document.getElementById('create').addEventListener('click', e => {
+    e.preventDefault()
+
+    let user = {
+      email: document.getElementById('email').value,
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    }
+
+    console.log(user)
+    
+      axios.post('/users', user)
+    .then(function (response) {
+    console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+  })
+
+  document.getElementById('login').addEventListener('click', e => {
+    e.preventDefault(
+      
+    )
+  })
+  </script>
 
 </body>
 
