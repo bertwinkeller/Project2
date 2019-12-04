@@ -95,18 +95,22 @@
     crossorigin="anonymous"></script>
   <script src="./app.js"></script>
   <script>
+    // event listner for CREATING account
     document.getElementById('create').addEventListener('click', e => {
     e.preventDefault()
 
+    // variables for user and password
+    let username = document.getElementById('username').value
+    let password = document.getElementById('password').value
+
+    // variable object for axios post
     let user = {
       email: document.getElementById('email').value,
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value
+      username: username,
+      password: password
     }
-
-    console.log(user)
-    
-      axios.post('/users', user)
+    // axios post for posting users to database
+    axios.post('/users', user)
     .then(function (response) {
     console.log(response)
     })
@@ -115,10 +119,30 @@
     })
   })
 
+// event listener for LOGIN button
   document.getElementById('login').addEventListener('click', e => {
-    e.preventDefault(
-      
-    )
+    e.preventDefault()
+
+    axios.get(`/users/${username}/${password}`)
+          .then(({ data }) => {
+            if (data) {
+              window.location.href = "./rent.html"
+            } else {
+              console.log('username/password incorrect')
+            }
+          })
+          .then(vehiclesIds => {
+            axios.get(`/multiple/vehicles/${vehiclesIds.join(',')}`)
+              .then(({ data }) => {
+                data.forEach(vehicle => {
+                  let vehicleCard = document.createElement('div')
+                  vehicleCard.innerHTML = `<img src="${vehicle.photoLink}"><h3>${vehicle.name}</h3>`
+                  document.getElementById('vehicles').append(vehicleCard)
+                })
+              })
+              .catch(e => console.error(e))
+          })
+          .catch(e => console.error(e))
   })
   </script>
 
