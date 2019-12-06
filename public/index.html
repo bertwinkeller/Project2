@@ -40,46 +40,53 @@
 </div>
 <div class="container">
   
-  <div class="row justify-content-center">
-    <h2>Log In </h2>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Username</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-          <button type="submit" id="login" class="btn btn-primary">Login</button>
-      </form>
+  <div id="signupForm">
+    <div class="row justify-content-center m-3">
+      <h4 class="text-center">Join Tally.io now – it's free!</h4>
     </div>
-  </div>
-  <div class="row justify-content-center">
-    <h2>Sign Up </h2>
-  </div>
-  <div class="card">
+    <div class="card">
       <div class="card-body">
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
           </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
-            <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
+          <div class="form-group" id="usernameGroup">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password">
           </div>
-            <button type="submit" id="create" class="btn btn-primary">Create</button>
+            <button type="submit" id="create" class="btn btn-primary btn-block">Join Tally.io</button>
         </form>
+        <p class="text-center mt-3">Already have an account?<span id="haveAccount" class="btn-link"> Login</span></p>
       </div>
     </div>
+  </div>
+
+  <div id="loginForm" class="d-none">
+    <div class="row justify-content-center m-3">
+      <h4 class="text-center">Welcome Back</h4>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input type="text" class="form-control" id="loginUsername" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+          </div>
+            <button type="submit" id="login" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="text-center mt-3">Need an account?<span id="needAccount" class="btn-link"> Signup</span></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -93,32 +100,78 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <script src="./app.js"></script>
   <script>
+
+    // Check if already logged in
+    if (localStorage.getItem('username')) {
+      document.querySelector('form').style.display = 'none'
+      username = localStorage.getItem('username')
+      password = localStorage.getItem('password')
+      window.location = '/rent.html'
+    }
+
+    // Hide signup show login
+    document.getElementById('haveAccount').addEventListener('click', () => {
+      document.getElementById('signupForm').classList = 'd-none'
+      document.getElementById('loginForm').classList = ''
+    })
+
+    // Hide login show signup
+    document.getElementById('needAccount').addEventListener('click', () => {
+      document.getElementById('loginForm').classList = 'd-none'
+      document.getElementById('signupForm').classList = ''
+    })
+
+    // event listner for CREATING account
     document.getElementById('create').addEventListener('click', e => {
     e.preventDefault()
 
+    // variable object for axios post
     let user = {
       email: document.getElementById('email').value,
       username: document.getElementById('username').value,
       password: document.getElementById('password').value
     }
 
-    console.log(user)
-    
-      axios.post('/users', user)
-    .then(function (response) {
-    console.log(response)
+    // axios post for posting users to database
+    axios.post('/users', user)
+    .then(({ data }) => {
+      localStorage.setItem('username', user.username)
+      localStorage.setItem('password', user.password)
+      window.location = './rent.html'
     })
-    .catch(function (error) {
-      console.log(error)
+    .catch((error) => {
+      if (error.response.status === 409) {
+        document.getElementById('username').style.border = '1px solid red'
+        let error = document.createElement('p')
+        error.textContent = 'Username taken'
+        error.style.color = 'red'
+        document.getElementById('usernameGroup').append(error)
+        document.getElementById('username').focus()
+      }
     })
   })
 
+// event listener for LOGIN button
   document.getElementById('login').addEventListener('click', e => {
-    e.preventDefault(
-      
-    )
+    e.preventDefault()
+    let username = document.getElementById('loginUsername').value
+    let password = document.getElementById('loginPassword').value
+    axios.get(`/users/${username}/${password}`)
+      .then(({ data }) => {
+        if (data) {
+          localStorage.setItem('username', username)
+          localStorage.setItem('password', password)
+          window.location.href = './rent.html'
+        } else {
+          let error = document.createElement('p')
+          error.textContent = 'Invalid Username/Password'
+          error.style.color = 'red'
+          error.classList = 'text-center mt-2'
+          document.querySelector('#loginForm form').append(error)
+        }
+      })
+      .catch(e => console.error(e))
   })
   </script>
 
