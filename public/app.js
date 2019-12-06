@@ -35,9 +35,9 @@ const displayVehicles = (array) => {
                 </p>
               </div>
             </div>
-            <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">Reviews</a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#carReviews${car.id}" role="button" aria-expanded="false" aria-controls="carReviews${car.id}">Reviews</a>
             <p></p>
-            <div class="collapse" id="carDeatails${car.id}">
+            <div class="collapse" id="carReviews${car.id}">
               <div class="card card-body">
                 <div class="card" style="width: 18rem;">
                   <div class="card-header">${car.reviews[0].name}</div>
