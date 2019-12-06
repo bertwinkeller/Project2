@@ -23,7 +23,7 @@ const displayVehicles = (array) => {
             <br>
             <br>
             <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">Reviews</a>
-            <br>
+            <p></p>
             <div class="collapse" id="carDeatails${car.id}">
               <div class="card card-body">
                 <div class="card" style="width: 18rem;">
