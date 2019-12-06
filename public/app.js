@@ -12,7 +12,7 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
-        console.log(car)
+      
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
@@ -51,14 +51,7 @@ const addVehicle = () => {
     .catch(e => console.error(e))
 
 }
-const updateVehicle = id => {
 
-    axios.put(`/vehicles/${id}`)
-    .then(() => {
-        console.log('Vehicle Updated')
-    })
-    .catch(e => console.error(e))
-}
 
 const deleteVehicle = id => {
     axios.delete(`/vehicles/${id}`)
