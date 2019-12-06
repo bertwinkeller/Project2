@@ -12,7 +12,7 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
-        console.log(car)
+      
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
@@ -26,7 +26,6 @@ const displayVehicles = (array) => {
         <br>
         <p>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#carDetails${car.id}" aria-expanded="false" aria-controls="carDetails${car.id}">Details</button>
-            <a href="#" class="btn btn-primary">Rent</a>
         </p>
         <div class="row">
             <div class="col">
@@ -45,6 +44,11 @@ const displayVehicles = (array) => {
         <div class="card-footer text-muted">
         </div>
         </div>
+        <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
+      </div>
+      <div class="card-footer text-muted">
+      </div>
+    </div>
     <br>`
     document.getElementById('rentDisplay').append(carCard)
     })
@@ -67,14 +71,7 @@ const addVehicle = () => {
     .catch(e => console.error(e))
 
 }
-const updateVehicle = id => {
 
-    axios.put(`/vehicles/${id}`)
-    .then(() => {
-        console.log('Vehicle Updated')
-    })
-    .catch(e => console.error(e))
-}
 
 const deleteVehicle = id => {
     axios.delete(`/vehicles/${id}`)
