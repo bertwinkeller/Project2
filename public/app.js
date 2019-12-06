@@ -12,24 +12,48 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
-        console.log(car)
         let carCard = document.createElement('div')
+        console.log(car.reviews)
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
-      <div class="card-header">
-        Featured
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">${car.name}</h5>
-        <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
-        <br>
-        <br>
-        <a href="#" class="btn btn-primary">Rent</a>
-      </div>
-      <div class="card-footer text-muted">
-      </div>
-    </div>
-    <br>`
+          <div class="card-header">Featured</div>
+          <div class="card-body">
+            <h5 class="card-title">${car.name}</h5>
+            <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
+            <br>
+            <br>
+            <a class="btn btn-primary" data-toggle="collapse" href="#carDetails${car.id}" role="button" aria-expanded="false" aria-controls="carDetails${car.id}">Details</a>
+            <p></p>
+            <div class="collapse multi-collapse" id="carDetails${car.id}">
+              <div class="card card-body">
+                <p>
+                Doors: ${car.doors}
+                <br>
+                MPG: ${car.mpg}
+                <br>
+                Seats: ${car.seats}
+                </p>
+              </div>
+            </div>
+            <a class="btn btn-primary" data-toggle="collapse" href="#carReviews${car.id}" role="button" aria-expanded="false" aria-controls="carReviews${car.id}">Reviews</a>
+            <p></p>
+            <div class="collapse" id="carReviews${car.id}">
+              <div class="card card-body">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-header">${car.reviews.reverse()[0].name}</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${car.reviews[0].review}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <a 
+            <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+      <br>
+      `
     document.getElementById('rentDisplay').append(carCard)
     })
     
@@ -51,14 +75,7 @@ const addVehicle = () => {
     .catch(e => console.error(e))
 
 }
-const updateVehicle = id => {
 
-    axios.put(`/vehicles/${id}`)
-    .then(() => {
-        console.log('Vehicle Updated')
-    })
-    .catch(e => console.error(e))
-}
 
 const deleteVehicle = id => {
     axios.delete(`/vehicles/${id}`)
@@ -108,3 +125,9 @@ const deleteReview = id => {
 }
 
 getVehicles()
+
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem('username')
+  localStorage.removeItem('password')
+  window.location = './index.html'
+})
