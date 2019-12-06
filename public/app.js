@@ -24,7 +24,7 @@ const displayVehicles = (array) => {
         <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
         <br>
         <br>
-        <a href="#" class="btn btn-primary">Rent</a>
+        <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
       </div>
       <div class="card-footer text-muted">
       </div>
