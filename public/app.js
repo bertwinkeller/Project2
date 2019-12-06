@@ -22,6 +22,19 @@ const displayVehicles = (array) => {
             <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
             <br>
             <br>
+            <a class="btn btn-primary" data-toggle="collapse" href="#carDetails${car.id}" role="button" aria-expanded="false" aria-controls="carDetails${car.id}">Details</a>
+            <p></p>
+            <div class="collapse multi-collapse" id="carDetails${car.id}">
+              <div class="card card-body">
+                <p>
+                Doors: ${car.doors}
+                <br>
+                MPG: ${car.mpg}
+                <br>
+                Seats: ${car.seats}
+                </p>
+              </div>
+            </div>
             <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">Reviews</a>
             <p></p>
             <div class="collapse" id="carDeatails${car.id}">
@@ -34,6 +47,7 @@ const displayVehicles = (array) => {
                 </div>
               </div>
             </div>
+            <a 
             <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
           </div>
           <div class="card-footer text-muted"></div>
