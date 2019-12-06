@@ -12,7 +12,7 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
-      
+        console.log(car)
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
@@ -24,26 +24,41 @@ const displayVehicles = (array) => {
             <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
         <br>
         <br>
-        <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#carDetails${car.id}" aria-expanded="false" aria-controls="carDetails${car.id}">Details</button>
-        </p>
-        <div class="row">
-            <div class="col">
-                <div class="collapse multi-collapse" id="carDetails${car.id}">
-                <div class="card card-body">
-                    <p>
-                    Doors: ${car.doors}
-                    <br>
-                    MPG: ${car.mpg}
-                    <br>
-                    Seats: ${car.seats}
-                </div>
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#carDetails${car.id}" aria-expanded="false" aria-controls="carDetails${car.id}">Details</button>
+            </p>
+            <div class="row">
+                <div class="col">
+                    <div class="collapse multi-collapse" id="carDetails${car.id}">
+                    <div class="card card-body">
+                        <p>
+                        Doors: ${car.doors}
+                        <br>
+                        MPG: ${car.mpg}
+                        <br>
+                        Seats: ${car.seats}
+                        </p>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-footer text-muted">
+        <a class="btn btn-primary" data-toggle="collapse" href="#carReviews${car.id}" role="button" aria-expanded="false" aria-controls="carReviews${car.id}">
+          Reviews      
+        </a>
+        </p>
+        <div class="collapse" id="carReviews${car.id}">
+        <div class="card card-body">
+        <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          ${car.reviews[0].name}
         </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">${car.reviews[0].review}</li>
+        </ul>
         </div>
+      </div>
+      </div>
         <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
       </div>
       <div class="card-footer text-muted">
