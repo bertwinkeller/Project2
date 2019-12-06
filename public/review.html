@@ -85,7 +85,6 @@
     crossorigin="anonymous"></script>
   <script>
 
-
     let username = localStorage.getItem('username')
     let password = localStorage.getItem('password')
 
@@ -96,7 +95,7 @@
         .then(({ data }) => JSON.parse(data.vehiclesRented))
         .then(vehicleIds => {
           console.log(vehicleIds)
-          axios.get(`/multiple/vehicles/${vehicleIds}`)
+          axios.get(`/multiple/vehicles/${vehicleIds.join(',')}`)
             .then(({ data }) => {
               data.forEach(vehicle => {
                 console.log(vehicle)
