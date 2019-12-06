@@ -24,7 +24,6 @@ const displayVehicles = (array) => {
         <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
         <br>
         <br>
-        <a href="#" class="btn btn-primary">Rent</a>
         <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">
           Reviews      
         </a>
@@ -41,6 +40,7 @@ const displayVehicles = (array) => {
         </div>
       </div>
       </div>
+        <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
       </div>
       <div class="card-footer text-muted">
       </div>
