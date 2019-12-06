@@ -16,36 +16,30 @@ const displayVehicles = (array) => {
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
-      <div class="card-header">
-        Featured
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">${car.name}</h5>
-        <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
-        <br>
-        <br>
-        <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">
-          Reviews      
-        </a>
-        </p>
-        <div class="collapse" id="carDeatails${car.id}">
-        <div class="card card-body">
-        <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          ${car.reviews[0].name}
+          <div class="card-header">Featured</div>
+          <div class="card-body">
+            <h5 class="card-title">${car.name}</h5>
+            <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
+            <br>
+            <br>
+            <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">Reviews</a>
+            <p></p>
+            <div class="collapse" id="carDeatails${car.id}">
+              <div class="card card-body">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-header">${car.reviews[0].name}</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${car.reviews[0].review}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
+          </div>
+          <div class="card-footer text-muted"></div>
         </div>
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">${car.reviews[0].review}</li>
-        </ul>
-        </div>
-      </div>
-      </div>
-        <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
-      </div>
-      <div class="card-footer text-muted">
-      </div>
-    </div>
-    <br>`
+      <br>
+      `
     document.getElementById('rentDisplay').append(carCard)
     })
     
@@ -117,3 +111,9 @@ const deleteReview = id => {
 }
 
 getVehicles()
+
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem('username')
+  localStorage.removeItem('password')
+  window.location = './index.html'
+})
