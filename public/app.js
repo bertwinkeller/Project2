@@ -101,3 +101,9 @@ const deleteReview = id => {
 }
 
 getVehicles()
+
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem('username')
+  localStorage.removeItem('password')
+  window.location = './index.html'
+})
