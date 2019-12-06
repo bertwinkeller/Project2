@@ -61,6 +61,41 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="./app.js"></script>
+  <script>
+
+let username = localStorage.getItem('username')
+let password = localStorage.getItem('password')
+
+console.log(username, password)
+
+  const rentVehicle = (carId) => {
+
+    axios.get(`/users/${username}/${password}`)
+    .then(({ data }) => {
+      let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] 
+      console.log(arr)
+      arr.push(carId)
+      let obj = {
+        vehiclesRented: JSON.stringify(arr)
+      }
+    axios.put(`users/${data.id}`,obj)
+    .then(({data})=> {
+      console.log(data)
+    })
+    .catch(e => console.log(e))
+})
+.catch(e => console.error(e))
+}
+  // let carTarget = document.getElementById('rentCar')
+  
+  document.addEventListener('click', e => {
+    console.log(e.target.dataset.vehicleid)
+    if(e.target.dataset.vehicleid) {
+      rentVehicle(e.target.dataset.vehicleid);
+    }
+  })
+  
+  </script>
 
 </body>
 
