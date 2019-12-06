@@ -12,7 +12,7 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
-      
+        console.log(car)
         let carCard = document.createElement('div')
         carCard.innerHTML = `
         <div class="card text-center border-dark mb-3">
@@ -25,6 +25,22 @@ const displayVehicles = (array) => {
         <br>
         <br>
         <a href="#" class="btn btn-primary">Rent</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#carDeatails${car.id}" role="button" aria-expanded="false" aria-controls="carDeatails${car.id}">
+          Reviews      
+        </a>
+        </p>
+        <div class="collapse" id="carDeatails${car.id}">
+        <div class="card card-body">
+        <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          ${car.reviews[0].name}
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">${car.reviews[0].review}</li>
+        </ul>
+        </div>
+      </div>
+      </div>
       </div>
       <div class="card-footer text-muted">
       </div>
