@@ -33,9 +33,13 @@ module.exports = app => {
   })
 
   app.put('/users/:id', (req, res) => {
-    User.findOne({ where: { id: parseInt(req.params.id) } })
-    //   .then(update some property,(rented?))
-      .then(() => res.sendStatus(200))
+    console.log(req.body.vehiclesRented)
+    User.update(
+      {vehiclesRented: req.body.vehiclesRented},
+      {where: { id: parseInt(req.params.id) } })
+      .then(user => {
+        res.send(user)
+      })
       .catch(e => console.error(e))
   })
 
