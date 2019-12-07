@@ -8,7 +8,7 @@
   <title>Home Page</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -69,6 +69,7 @@
     </div>
   </div>
 
+  <h5 class="m-3 text-center">Your Reviews</h5>
 
   <div id="vehicles"></div>
 
@@ -88,34 +89,52 @@
     let username = localStorage.getItem('username')
     let password = localStorage.getItem('password')
 
+    // Initialize User Variables
+    let userId = ''
+    let userReview
+    let reveiwId
+
     // function to display loged in users rented vehicles
     const getUsersVehicles = (username, password) => {
-
       axios.get(`/users/${username}/${password}`)
-        .then(({ data }) => JSON.parse(data.vehiclesRented))
+        .then(({ data }) => {
+          userId = data.id
+          return JSON.parse(data.vehiclesRented)
+        })
         .then(vehicleIds => {
           console.log(vehicleIds)
           axios.get(`/multiple/vehicles/${vehicleIds.join(',')}`)
             .then(({ data }) => {
               data.forEach(vehicle  => {
                 console.log(vehicle)
+                vehicle.reviews.forEach(e => {
+                  if (e.userId === userId) {
+                    userReview = e.review
+                    reveiwId = e.id
+                  }
+                })
+                if(userReview) {
+                  userReview = `
+                    <h6>${userReview}</h6>
+                    <button type="button" id="review${reveiwId}" class="btn btn-primary deleteReview">Delete Review</button> 
+                  `
+                } else {
+                  userReview = `<button type="button" id="reviewTarget${vehicle.id}" class="btn btn-primary reviewButton" data-toggle="modal" data-vehicle=${vehicle.id} data-target="#rentModal">Leave a Review</button>`
+                }
                 let vehicleCard = document.createElement('div')
                 vehicleCard.innerHTML = `
       <div class="card text-center border-dark mb-3">
       <div class="card-body">
-        <h5 class="card-title">${vehicle.name}</h5>
         <img class="card-img-top embed-responsive-item" src="${vehicle.photoLink}">
-        <br>
-        <br>
-        <button type="button" id="reviewTarget${vehicle.id}" class="btn btn-primary reviewButton" data-toggle="modal" data-vehicle=${vehicle.id} data-target="#rentModal">
-       Review
-        </button>
+        <h5 class="mt-3">${vehicle.name}</h5>
+        ${userReview}
       </div>
       <div class="card-footer text-muted">
       </div>
       </div>
       <br>
       `
+      userReview = ''
                 document.getElementById('vehicles').append(vehicleCard)
               })
             })
@@ -135,7 +154,8 @@
           name: document.getElementById('reviewerName').value,
           rating: document.getElementById('reviewStars').value,
           review: document.getElementById('reviewMessage').value,
-          vehicleId: document.getElementById('vehicleId').value
+          vehicleId: document.getElementById('vehicleId').value,
+          userId: userId
         }
         axios.post('/reviews', review)
         .then(response => {
