@@ -123,6 +123,7 @@ console.log(username, password)
         .then(res => console.log(res))
         .catch(err => console.error(err))
       $('#' + e.target.id).closest('.modal').modal('hide')
+      document.getElementById(`carCard${document.getElementById('vehicleid').value}`).remove()
     }
   })
 
