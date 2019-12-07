@@ -66,76 +66,87 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <<<<<<< HEAD <div class="container">
         <div class="row" id="rentDisplay">
 
         </div>
-    </div>
-    o
+        =======
+        <div class="container">
+            <h5 class="text-center m-4">Find The Perfect Vehicle</h5>
+            <div class="row" id="rentDisplay">
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./app.js"></script>
-    <script>
-        let username = localStorage.getItem('username')
-        let password = localStorage.getItem('password')
+                >>>>>>> eb08558e3b246ede6b82ad2e3ddb0699a9b2b3e0
+            </div>
+            o
 
-        console.log(username, password)
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="./app.js"></script>
+            <script>
+                let username = localStorage.getItem('username')
+                let password = localStorage.getItem('password')
 
-        const rentVehicle = (carId) => {
+                console.log(username, password)
 
-                axios.get(`/users/${username}/${password}`)
-                    .then(({
-                        data
-                    }) => {
-                        let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : []
-                        console.log(arr)
-                        arr.push(carId)
-                        let obj = {
-                            vehiclesRented: JSON.stringify(arr)
-                        }
-                        axios.put(`users/${data.id}`, obj)
+                const rentVehicle = (carId) => {
+
+                        axios.get(`/users/${username}/${password}`)
                             .then(({
                                 data
                             }) => {
-                                console.log(data)
+                                let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : []
+                                console.log(arr)
+                                arr.push(carId)
+                                let obj = {
+                                    vehiclesRented: JSON.stringify(arr)
+                                }
+                                axios.put(`users/${data.id}`, obj)
+                                    .then(({
+                                        data
+                                    }) => {
+                                        console.log(data)
+                                    })
+                                    .catch(e => console.log(e))
                             })
-                            .catch(e => console.log(e))
-                    })
-                    .catch(e => console.error(e))
-            }
-            // let carTarget = document.getElementById('rentCar')
+                            .catch(e => console.error(e))
+                    }
+                    // let carTarget = document.getElementById('rentCar')
 
-        document.addEventListener('click', e => {
-            console.log(e.target.dataset.vehicleid)
-            if (e.target.dataset.vehicleid) {
-                rentVehicle(e.target.dataset.vehicleid);
-            }
-        })
-    </script>
+                document.addEventListener('click', e => {
+                    console.log(e.target.dataset.vehicleid)
+                    if (e.target.dataset.vehicleid) {
+                        rentVehicle(e.target.dataset.vehicleid);
+                    }
+                })
+            </script>
+            axios.get(`/users/${username}/${password}`) .then(({ data }) => { let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] console.log(arr) arr.push(carId) let obj = { vehiclesRented: JSON.stringify(arr) } axios.put(`users/${data.id}`,obj)
+            .then(({data})=> { console.log(data) }) .catch(e => console.log(e)) }) .catch(e => console.error(e)) } // let carTarget = document.getElementById('rentCar') document.addEventListener('click', e => { if(e.target.dataset.vehicleid) { rentVehicle(e.target.dataset.vehicleid);
+            } })
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./app.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('input[name="datetimes"]').daterangepicker({
-                timePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().startOf('hour').add(32, 'hour'),
-                locale: {
-                    format: 'M/DD hh:mm A'
-                }
-            });
-        });
-    </script>
+            </script>
+
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="./app.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+            <script>
+                $(function() {
+                    $('input[name="datetimes"]').daterangepicker({
+                        timePicker: true,
+                        startDate: moment().startOf('hour'),
+                        endDate: moment().startOf('hour').add(32, 'hour'),
+                        locale: {
+                            format: 'M/DD hh:mm A'
+                        }
+                    });
+                });
+            </script>
 </body>
 
-</html>
+</html>git

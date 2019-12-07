@@ -12,11 +12,41 @@ const getVehicles = () => {
 // displays vehicles
 const displayVehicles = (array) => {
     array.forEach(car => {
+      let rating = 0
+      let ratingSrc
+      let reviewsText = ''
+      // Determine Ratings Value and Create Reviews
+      car.reviews.forEach((e) => {
+        rating += parseInt(e.rating)
+        reviewsText += `<h5 class="d-inline">${e.name}</h5><p class="d-inline ml-3">Rating: ${e.rating}/5</p><p>${e.review}</p>`
+      })
+      // Determine Ratings Image Link
+      rating = Math.ceil(rating/car.reviews.length)
+      console.log(rating)
+      switch (rating) {
+        case 5:
+          ratingSrc = "./images/iconFiveStars.svg"
+          break
+        case 4:
+          ratingSrc = "./images/iconFourStars.svg"
+          break
+        case 3:
+          ratingSrc = "./images/iconThreeStars.svg"
+          break
+        case 2:
+          ratingSrc = "./images/iconTwoStars.svg"
+          break
+        case 1:
+          ratingSrc = "./images/iconOneStars.svg"
+          break
+        default:
+          ratingSrc = "./images/iconFiveStars.svg"
+      }
+        console.log(car)
         let carCard = document.createElement('div')
         console.log(car.reviews)
         carCard.innerHTML = `
-        <div class="card text-center border-dark mb-3">
-          <div class="card-header">Featured</div>
+        <div class="card text-center border-0 mb-3">
           <div class="card-body">
             <h5 class="card-title">${car.name}</h5>
             <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
@@ -46,13 +76,32 @@ const displayVehicles = (array) => {
                   </ul>
                 </div>
               </div>
+              <div class="col">
+                <a href="#" class="btn btn-primary btn-block mt-2" id="rentCar" data-vehicleId=${car.id}>Book Instantly</a>
+              </div>
             </div>
-            <a 
-            <a href="#" class="btn btn-primary" id="rentCar" data-vehicleId=${car.id}>Rent</a>
           </div>
-          <div class="card-footer text-muted"></div>
         </div>
-      <br>
+
+      <!-- Reviews Modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="review${car.id}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">${car.name}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ${reviewsText}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       `
     document.getElementById('rentDisplay').append(carCard)
     })
