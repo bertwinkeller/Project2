@@ -28,9 +28,12 @@ module.exports = app => {
   })
 
   app.put('/vehicles/:id', (req, res) => {
-    Vehicle.findOne({ where: { id: parseInt(req.params.id) } })
-    //   .then(update some property,(rented?))
-      .then(() => res.sendStatus(200))
+    Vehicle.update(
+      {reservedFrom: req.body.reservedFrom},
+      {where: { id: parseInt(req.params.id) } })
+      .then(Vehicle => {
+        res.send(Vehicle)
+      })
       .catch(e => console.error(e))
   })
 
