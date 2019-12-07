@@ -14,7 +14,9 @@ module.exports = app => {
       id: {
         [Op.or]: req.params.id.split(',')
       }
-    }})
+    },
+    include: Review
+  })
       .then(vehicle => res.json(vehicle))
       .catch(e => console.error(e))
   })
