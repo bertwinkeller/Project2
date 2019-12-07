@@ -48,7 +48,6 @@ const displayVehicles = (array) => {
         carCard.innerHTML = `
         <div class="card text-center border-0 mb-3">
           <div class="card-body">
-<<<<<<< HEAD
             <h5 class="card-title">${car.name}</h5>
             <img class="card-img-top embed-responsive-item" src="${car.photoLink}">
             <br>
@@ -75,15 +74,6 @@ const displayVehicles = (array) => {
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">${car.reviews[0].review}</li>
                   </ul>
-=======
-            <img class="img-fluid" src="${car.photoLink}">
-            <div class="row">
-              <div class="col">
-                <h6 class="card-title text-left mt-2 mb-0">${car.name}</h6>
-                <div class="row ml-0">
-                  <img src="${ratingSrc}">
-                  <a href="#" class="text-primary ml-2"data-toggle="modal" data-target="#review${car.id}">Reviews</a>
->>>>>>> 04fd12809e7aec5147cf43fe3f0aa2735c306df5
                 </div>
               </div>
               <div class="col">
