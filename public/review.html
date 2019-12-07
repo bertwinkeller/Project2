@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home Page</title>
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
@@ -116,7 +117,7 @@
                 if(userReview) {
                   userReview = `
                     <h6>${userReview}</h6>
-                    <button type="button" id="review${reveiwId}" class="btn btn-primary deleteReview">Delete Review</button> 
+                    <button type="button" id="review${reveiwId}" data-reviewid="${reveiwId}" class="btn btn-primary deleteReview">Delete Review</button> 
                   `
                 } else {
                   userReview = `<button type="button" id="reviewTarget${vehicle.id}" class="btn btn-primary reviewButton" data-toggle="modal" data-vehicle=${vehicle.id} data-target="#rentModal">Leave a Review</button>`
@@ -149,7 +150,6 @@
       document.getElementById('reviewSubmit').addEventListener('click', e => {
         e.preventDefault()
         // Hide Modal
-        $('#rentModal').modal('hide')
         let review = {
           name: document.getElementById('reviewerName').value,
           rating: document.getElementById('reviewStars').value,
@@ -163,6 +163,7 @@
         })
         .catch(e => console.log(e))
         console.log(review)
+        location.reload()
       })
     }
 
@@ -180,8 +181,15 @@
 
     // Fill hidden input with data-vehicle value 
     document.addEventListener('click', e => {
-      if (e.target.classList.contains("reviewButton")) {
+      if (e.target.classList.contains('reviewButton')) {
         document.getElementById('vehicleId').value = e.target.dataset.vehicle
+      }
+      if (e.target.classList.contains('deleteReview')) {
+        axios.delete(`/reviews/${e.target.dataset.reviewid}`)
+          .then(() => {
+            location.reload()
+          })
+          .catch(e => console.log(e))
       }
     })
 
