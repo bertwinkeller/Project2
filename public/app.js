@@ -57,7 +57,7 @@ const displayVehicles = (array) => {
                 </div>
               </div>
               <div class="col">
-                <a href="#" class="btn btn-primary btn-block mt-2" id="rentCar" data-vehicleId=${car.id}>Book Instantly</a>
+                <a href="#" class="btn btn-primary btn-block mt-2" data-target="#bookInstantly${car.id}" data-vehicleId=${car.id}>Book Instantly</a>
               </div>
             </div>
           </div>
@@ -75,6 +75,23 @@ const displayVehicles = (array) => {
             </div>
             <div class="modal-body">
               ${reviewsText}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book Instantly Modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="bookInstantly${car.id}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">${car.name}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -160,3 +177,14 @@ document.getElementById('logout').addEventListener('click', () => {
   localStorage.removeItem('password')
   window.location = './index.html'
 })
+
+
+
+  $('input[name="datetimes"]').daterangepicker({
+      timePicker: true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour'),
+      locale: {
+          format: 'M/DD/YY'
+      }
+    })
