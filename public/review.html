@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home Page</title>
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -21,13 +22,13 @@
     <h3 class="title">TALLY.IO</h3>
     <div>
       <div class="dropleft">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          More
+          <img class="menu" src="./images/menuIcon.png">
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="./rent.html">Rent</a>
-          <a class="dropdown-item" href="./review.html">Review</a>
+          <a class="dropdown-item" href="./review.html">Garage</a>
           <a class="dropdown-item" id="logout">Logout</a>
         </div>
       </div>
@@ -59,6 +60,7 @@
               <label for="message-text" class="col-form-label">Review</label>
               <textarea class="form-control" id="reviewMessage"></textarea>
             </div>
+            <input type="hidden" name="vehicleId" id="vehicleId">
           </form>
         </div>
         <div class="modal-footer">
@@ -68,6 +70,7 @@
     </div>
   </div>
 
+  <h5 class="m-3 text-center">Your Reviews</h5>
 
   <div id="vehicles"></div>
 
@@ -87,36 +90,52 @@
     let username = localStorage.getItem('username')
     let password = localStorage.getItem('password')
 
+    // Initialize User Variables
+    let userId = ''
+    let userReview
+    let reveiwId
+
     // function to display loged in users rented vehicles
     const getUsersVehicles = (username, password) => {
-
       axios.get(`/users/${username}/${password}`)
-        .then(({ data }) => JSON.parse(data.vehiclesRented))
+        .then(({ data }) => {
+          userId = data.id
+          return JSON.parse(data.vehiclesRented)
+        })
         .then(vehicleIds => {
           console.log(vehicleIds)
           axios.get(`/multiple/vehicles/${vehicleIds.join(',')}`)
             .then(({ data }) => {
-              data.forEach(vehicle => {
+              data.forEach(vehicle  => {
                 console.log(vehicle)
+                vehicle.reviews.forEach(e => {
+                  if (e.userId === userId) {
+                    userReview = e.review
+                    reveiwId = e.id
+                  }
+                })
+                if(userReview) {
+                  userReview = `
+                    <h6>${userReview}</h6>
+                    <button type="button" id="review${reveiwId}" data-reviewid="${reveiwId}" class="btn btn-primary deleteReview">Delete Review</button> 
+                  `
+                } else {
+                  userReview = `<button type="button" id="reviewTarget${vehicle.id}" class="btn btn-primary reviewButton" data-toggle="modal" data-vehicle=${vehicle.id} data-target="#rentModal">Leave a Review</button>`
+                }
                 let vehicleCard = document.createElement('div')
                 vehicleCard.innerHTML = `
       <div class="card text-center border-dark mb-3">
-      <div class="card-header">
-        Featured
-      </div>
       <div class="card-body">
-        <h5 class="card-title">${vehicle.name}</h5>
         <img class="card-img-top embed-responsive-item" src="${vehicle.photoLink}">
-        <br>
-        <br>
-        <button type="button" id="reviewTargetBtn" class="btn btn-primary" data-toggle="modal" data-vehicle=${vehicleIds} data-target="#rentModal">
-       Review
-        </button>
+        <h5 class="mt-3">${vehicle.name}</h5>
+        ${userReview}
       </div>
       <div class="card-footer text-muted">
       </div>
       </div>
-      <br>`
+      <br>
+      `
+      userReview = ''
                 document.getElementById('vehicles').append(vehicleCard)
               })
             })
@@ -130,20 +149,21 @@
     const postReview = () => {
       document.getElementById('reviewSubmit').addEventListener('click', e => {
         e.preventDefault()
-        let reviewParentElem = document.getElementById('reviewTargetBtn')
-        let reviewVehicleNum = reviewParentElem.dataset.vehicle
+        // Hide Modal
         let review = {
-        name: document.getElementById('reviewerName').value,
-        rating: document.getElementById('reviewStars').value,
-        review: document.getElementById('reviewMessage').value,
-        vehicleId: reviewVehicleNum
-      }
+          name: document.getElementById('reviewerName').value,
+          rating: document.getElementById('reviewStars').value,
+          review: document.getElementById('reviewMessage').value,
+          vehicleId: document.getElementById('vehicleId').value,
+          userId: userId
+        }
         axios.post('/reviews', review)
         .then(response => {
           console.log(response)
         })
         .catch(e => console.log(e))
         console.log(review)
+        location.reload()
       })
     }
 
@@ -157,6 +177,20 @@
       localStorage.removeItem('username')
       localStorage.removeItem('password')
       window.location = './index.html'
+    })
+
+    // Fill hidden input with data-vehicle value 
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('reviewButton')) {
+        document.getElementById('vehicleId').value = e.target.dataset.vehicle
+      }
+      if (e.target.classList.contains('deleteReview')) {
+        axios.delete(`/reviews/${e.target.dataset.reviewid}`)
+          .then(() => {
+            location.reload()
+          })
+          .catch(e => console.log(e))
+      }
     })
 
 

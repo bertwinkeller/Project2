@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Log In</title>
+  <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -105,6 +106,8 @@
       document.getElementById('signupForm').classList = ''
     })
 
+    let signupError = false
+
     // event listner for CREATING account
     document.getElementById('create').addEventListener('click', e => {
     e.preventDefault()
@@ -125,15 +128,20 @@
     })
     .catch((error) => {
       if (error.response.status === 409) {
-        document.getElementById('username').style.border = '1px solid red'
-        let error = document.createElement('p')
-        error.textContent = 'Username taken'
-        error.style.color = 'red'
-        document.getElementById('usernameGroup').append(error)
-        document.getElementById('username').focus()
+        if (!signupError) {
+          signupError = true
+          document.getElementById('username').style.border = '1px solid red'
+          let error = document.createElement('p')
+          error.textContent = 'Username taken'
+          error.style.color = 'red'
+          document.getElementById('usernameGroup').append(error)
+          document.getElementById('username').focus()
+        }
       }
     })
   })
+
+  let loginError = false
 
 // event listener for LOGIN button
   document.getElementById('login').addEventListener('click', e => {
@@ -147,11 +155,14 @@
           localStorage.setItem('password', password)
           window.location.href = './rent.html'
         } else {
-          let error = document.createElement('p')
-          error.textContent = 'Invalid Username/Password'
-          error.style.color = 'red'
-          error.classList = 'text-center mt-2'
-          document.querySelector('#loginForm form').append(error)
+          if (!loginError) {
+            loginError = true
+            let error = document.createElement('p')
+            error.textContent = 'Invalid Username/Password'
+            error.style.color = 'red'
+            error.classList = 'text-center mt-2'
+            document.querySelector('#loginForm form').append(error)
+          }
         }
       })
       .catch(e => console.error(e))
