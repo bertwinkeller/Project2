@@ -44,8 +44,9 @@ const displayVehicles = (array) => {
       }
         console.log(car)
         let carCard = document.createElement('div')
+        carCard.className = 'vehicles'
         carCard.innerHTML = `
-        <div class="card text-center border-0 mb-3">
+        <div class="card text-center border-1 mb-3">
           <div class="card-body">
             <img class="img-fluid" src="${car.photoLink}">
             <div class="row">
