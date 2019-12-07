@@ -6,23 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Cantarell:400i&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" href="./style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page</title>
     <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href="https://fonts.googleapis.com/css?family=Cantarell|Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 
@@ -64,94 +50,58 @@
 
         </div>
     </div>
-    <nav class="navbar navbar-dark bg-dark" id="nav">
-        <a class="navbar-brand" href="./index.html">
-            <img src="./images/logo.png" width="40" height="40" alt="Logo">
-        </a>
-        <h3 class="title">TALLY.IO</h3>
-        <div>
-            <div class="dropleft">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            More
-          </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="./rent.html">Rent</a>
-                    <a class="dropdown-item" href="./review.html">Review</a>
-                    <a class="dropdown-item" id="logout">Logout</a>
+
+    <!-- Book Instantly Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="bookInstantly">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="datepicker" class="col-form-label">Select a Date to Reserve Vehicle</label>
+                            <input type="text" class="form-control" id="datepicker" class="datepicker">
+                        </div>
+                        <input type="hidden" name="vehicleid" id="vehicleid">
+                        <button id="reserveVehicle" class="reserve btn btn-primary">Reserve</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <nav class="navbar navbar-dark bg-dark" id="nav">
-                <a class="navbar-brand" href="./index.html">
-                    <img src="./images/logo.png" width="40" height="40" alt="Logo">
-                </a>
-                <h3 class="title">TALLY.IO</h3>
-                <div>
-                    <div class="dropleft">
-                        <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="menu" src="./images/menuIcon.png">
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="./rent.html">Rent</a>
-                            <a class="dropdown-item" href="./review.html">Garage</a>
-                            <a class="dropdown-item" id="logout">Logout</a>
-                        </div>
-                    </div>
-            </nav>
-            <div class="container">
-                <div class="row" id="rentDisplay">
-
-                </div>
-
-                <div class="container">
-                    <h5 class="text-center m-4">Find The Perfect Vehicle</h5>
-                    <div class="row" id="rentDisplay">
+        </div>
+    </div>
+    </div>
 
 
-                    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="./app.js"></script>
+    <script>
+        let username = localStorage.getItem('username')
+        let password = localStorage.getItem('password')
 
+        console.log(username, password)
 
-                    <script>
-                        let username = localStorage.getItem('username')
-                        let password = localStorage.getItem('password')
+        const rentVehicle = (carId) => {
 
-                        console.log(username, password)
-
-                        const rentVehicle = (carId) => {
-
-                                axios.get(`/users/${username}/${password}`)
-                                    .then(({
-                                        data
-                                    }) => {
-                                        let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : []
-                                        console.log(arr)
-                                        arr.push(carId)
-                                        let obj = {
-                                            vehiclesRented: JSON.stringify(arr)
-                                        }
-                                        axios.put(`users/${data.id}`, obj)
-                                            .then(({
-                                                data
-                                            }) => {
-                                                console.log(data)
-                                            })
-                                            .catch(e => console.log(e))
-                                    })
-                                    .catch(e => console.error(e))
-                            }
-                            // let carTarget = document.getElementById('rentCar')
-
-                        document.addEventListener('click', e => {
-                            console.log(e.target.dataset.vehicleid)
-                            if (e.target.dataset.vehicleid) {
-                                rentVehicle(e.target.dataset.vehicleid);
-                            }
-                        })
-                    </script>
-                    <script>
-                        axios.get(`/users/${username}/${password}`).then(({
-                        dat
-                        }) => {
-                        let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] console.log(arr) arr.push(carId) let obj = {
+                axios.get(`/users/${username}/${password}`)
+                    .then(({
+                        data
+                    }) => {
+                        let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : []
+                        console.log(arr)
+                        arr.push(carId)
+                        let obj = {
                             vehiclesRented: JSON.stringify(arr)
                         }
                         axios.put(`users/${data.id}`, obj)
@@ -159,39 +109,67 @@
                                 data
                             }) => {
                                 console.log(data)
-                            }).catch(e => console.log(e))
-                        }).catch(e => console.error(e))
-                        } // let carTarget = document.getElementById('rentCar') document.addEventListener('click', e => { if(e.target.dataset.vehicleid) { rentVehicle(e.target.dataset.vehicleid);
-                        }
-                        })
-                    </script>
+                            })
+                            .catch(e => console.log(e))
+                    })
+                    .catch(e => console.error(e))
+            }
+            // let carTarget = document.getElementById('rentCar')
 
-                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                    <script src="./app.js"></script>
-                    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-                    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                    <script src="./app.js"></script>
-                    <script>
-                        $(function() {
-                            $('input[name="datetimes"]').daterangepicker({
-                                timePicker: true,
-                                startDate: moment().startOf('hour'),
-                                endDate: moment().startOf('hour').add(32, 'hour'),
-                                locale: {
-                                    n
-                                    format: 'M/DD hh:mm A'
-                                }
-                            });
-                        });
-                    </script>
+        document.addEventListener('click', e => {
+            if (e.target.dataset.vehicleid) {
+                document.getElementById('vehicleid').value = e.target.dataset.vehicleid
+                rentVehicle(e.target.dataset.vehicleid);
+            }
+            if (e.target.classList.contains('reserve')) {
+                e.preventDefault()
+                let reserveFrom = {
+                    reservedFrom: document.getElementById('datepicker').value
+                }
+                axios.put(`/vehicles/${document.getElementById('vehicleid').value}`, reserveFrom)
+                    .then(res => console.log(res))
+                    .catch(err => console.error(err))
+                $('#' + e.target.id).closest('.modal').modal('hide')
+                document.getElementById(`carCard${document.getElementById('vehicleid').value}`).remove()
+            }
+        })
+
+        $('#datepicker').daterangepicker({
+            timePicker: false,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(24, 'hour'),
+            locale: {
+                format: 'M/DD/YY'
+            }
+        })
+    </script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./app.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./app.js"></script>
+    <script>
+        $(function() {
+            $('input[name="datetimes"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    n
+                    format: 'M/DD hh:mm A'
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
