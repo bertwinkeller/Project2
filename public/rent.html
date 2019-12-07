@@ -129,10 +129,23 @@
                     }
                 })
             </script>
-            axios.get(`/users/${username}/${password}`) .then(({ data }) => { let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] console.log(arr) arr.push(carId) let obj = { vehiclesRented: JSON.stringify(arr) } axios.put(`users/${data.id}`,obj)
-            .then(({data})=> { console.log(data) }) .catch(e => console.log(e)) }) .catch(e => console.error(e)) } // let carTarget = document.getElementById('rentCar') document.addEventListener('click', e => { if(e.target.dataset.vehicleid) { rentVehicle(e.target.dataset.vehicleid);
-            } })
-
+            <script>
+                axios.get(`/users/${username}/${password}`).then(({
+                data
+                }) => {
+                let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] console.log(arr) arr.push(carId) let obj = {
+                    vehiclesRented: JSON.stringify(arr)
+                }
+                axios.put(`users/${data.id}`, obj)
+                    .then(({
+                        data
+                    }) => {
+                        console.log(data)
+                    }).catch(e => console.log(e))
+                }).catch(e => console.error(e))
+                } // let carTarget = document.getElementById('rentCar') document.addEventListener('click', e => { if(e.target.dataset.vehicleid) { rentVehicle(e.target.dataset.vehicleid);
+                }
+                })
             </script>
 
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
