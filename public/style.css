@@ -1,5 +1,7 @@
-#search{
-  margin: 25px;
+h1, h2, h3, h4, h5, h6, p {
+  font-family: roboto;
+  font-weight: 400;
+  color: rgb(70, 82, 92);
 }
 
 .title{
@@ -7,3 +9,13 @@
   color: white;
 }
 
+.btn-primary {
+  background-color: #694966;
+  border-color: #694966;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: #7c5678;
+  border-color: #7c5678;
+  outline: 0;
+}
