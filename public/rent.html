@@ -131,7 +131,7 @@
             </script>
             <script>
                 axios.get(`/users/${username}/${password}`).then(({
-                data
+                dat
                 }) => {
                 let arr = data.vehiclesRented ? JSON.parse(data.vehiclesRented) : [] console.log(arr) arr.push(carId) let obj = {
                     vehiclesRented: JSON.stringify(arr)
