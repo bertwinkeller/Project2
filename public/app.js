@@ -45,6 +45,7 @@ const displayVehicles = (array) => {
         console.log(car)
         let carCard = document.createElement('div')
         carCard.className = 'vehicles'
+        carCard.id = `carCard${car.id}`
         carCard.innerHTML = `
         <div class="card text-center border-1 mb-3">
           <div class="card-body">
@@ -54,11 +55,11 @@ const displayVehicles = (array) => {
                 <h6 class="card-title text-left mt-2 mb-0">${car.name}</h6>
                 <div class="row ml-0">
                   <img src="${ratingSrc}">
-                  <a href="#" class="text-primary ml-2"data-toggle="modal" data-target="#review${car.id}">Reviews</a>
+                  <a href="#" class="text-primary ml-2" data-toggle="modal" data-target="#review${car.id}">Reviews</a>
                 </div>
               </div>
               <div class="col">
-                <a href="#" class="btn btn-primary btn-block mt-2" id="rentCar" data-vehicleId=${car.id}>Book Instantly</a>
+                <a href="#" class="btn btn-primary btn-block mt-2" data-toggle="modal" data-target="#bookInstantly" data-vehicleId=${car.id}>Book Instantly</a>
               </div>
             </div>
           </div>
