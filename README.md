@@ -13,7 +13,7 @@ Navigate to both the root folder and  "npm install" to install the required depe
 
 
 ## Deployment
-You can see a deployed version [here](https://p0ll-io.herokuapp.com/).
+You can see a deployed version [here](https://thawing-plateau-11744.herokuapp.com/index.html).
 
 ## Built With
 * HTML
