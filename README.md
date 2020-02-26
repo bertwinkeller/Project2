@@ -7,7 +7,7 @@ Tally.io is a full stack application for renting and reviewing exotic cars. It U
 
 ## Install
 
-Git clone the repo [here]()
+Git clone the repo [here](https://github.com/bertwinkeller/Project2.git)
 
 Navigate to both the root folder and  "npm install" to install the required dependencies.
 
